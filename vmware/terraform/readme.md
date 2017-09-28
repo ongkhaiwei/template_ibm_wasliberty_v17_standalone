@@ -9,7 +9,7 @@ This template will install the Liberty server single node topology. This templat
 
 ### Clouds
 
- VMWare<br>
+ VMware<br>
 <br>
 ### Template Version
 
@@ -33,8 +33,10 @@ Redhat 7, Ubuntu 16<br>
 <br>
 ### Usage and Special Notes
 
-- Installation is via Installation Manager, please ensure this has been correctly on the Repo Server.<br>
-- Modify the libertynode_was_liberty_edition variable in CAM Variables to change the installation type to base, core or nd.<br>
+1. The user is responsible for obtaining appropriate software licenses and downloads prior to template deployment.<br>
+2. Installation is via Installation Manager, please ensure this has been correctly on the Repo Server.<br>
+3. Modify the libertynode_was_liberty_edition variable in CAM Variables to change the installation type to base, core or nd.<br>
+<br>
 
 
 ## Overview
