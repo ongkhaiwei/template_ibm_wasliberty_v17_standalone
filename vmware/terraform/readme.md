@@ -1,9 +1,9 @@
-# Template - IBM WAS Liberty V17 Standalone
+# Template - IBM WAS Liberty V17 on a single virtual Machine
 Template Version - 1.0
 
 ## Description
 
-This template will install the Liberty server single node topology. This template will install either BASE, CORE or ND Edition.<br>
+This template will install the Liberty server single node topology. This template will install either base, core or nd Edition.<br>
 
 ## Features
 
@@ -17,25 +17,29 @@ V1.0<br>
 <br>
 ### Operating Systems Supported
 
-Redhat 7, Ubuntu 16<br>
+Red Hat Enterprise Linux 7<br>
+Red Hat Enterprise Linux 6<br>
+Ubuntu 16.04<br>
 <br>
 ### Topology
 
-1) Liberty server - single node<br>
+1 virtual machine:<br>
+  Liberty server - single node<br>
 <br>
 ### Software Deployed
 
-- IBM Liberty version 17<br>
+IBM Liberty version 17<br>
 <br>
 ### Default Virtual Machine Settings
 
- VCPU = 1, Memory = 4GB, Storage = 20GB<br>
+ vCPU = 1, Memory = 4GB, Storage = 25GB<br>
 <br>
 ### Usage and Special Notes
 
 1. The user is responsible for obtaining appropriate software licenses and downloads prior to template deployment.<br>
-2. Installation is via Installation Manager, please ensure this has been correctly on the Repo Server.<br>
-3. Modify the libertynode_was_liberty_edition variable in CAM Variables to change the installation type to base, core or nd.<br>
+2. Modify the libertynode_was_liberty_edition variable in CAM Variables to change the installation type to base, core or nd.<br>
+3. IBM Knowledge Center for WAS Liberty - <a href=\"https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/as_ditamaps/was900_welcome_liberty.html\" target=\"_blank\">https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/as_ditamaps/was900_welcome_liberty.html</a><br>
+4. IBM Support Portal - <a href=\"https://www.ibm.com/support/home/\" target=\"_blank\">https://www.ibm.com/support/home/</a><br>
 <br>
 
 
@@ -90,12 +94,12 @@ The following table describes the nodes and relevant software component deployed
     <th>Description</th>
   </tr>
   <tr>
-    <td>libertynode</code></td>
+    <td>LibertyNode01</code></td>
     <td>liberty_install</code></td>
     <td>installs WAS Liberty Base</code></td>
   </tr>
   <tr>
-    <td>libertynode</code></td>
+    <td>LibertyNode01</code></td>
     <td>liberty_create_server</code></td>
     <td>create and configure a liberty server instance</code></td>
   </tr>
