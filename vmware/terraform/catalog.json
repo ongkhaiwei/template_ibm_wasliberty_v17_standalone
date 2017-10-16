@@ -1,6 +1,6 @@
 {
-    "name": "IBM WAS Liberty V17 on a single virtual Machine - VMware vSphere",
-    "description": "This template will install the Liberty server single node topology. This template will install either base, core or nd Edition.",
+    "name": "IBM WebSphere Application Server Liberty V17 on a single virtual machine - VMware vSphere",
+    "description": "This template deploys a standalone instance of WebSphere Application Server Liberty V17 on a Linux virtual machine. This template can install base, core or nd edition.",
     "version": "1.0",
     "imageUrl": "",
     "image": "",
@@ -23,9 +23,9 @@
       }
     },
     "metadata": {
-      "displayName": "IBM WAS Liberty V17 on a single virtual Machine",
+      "displayName": "IBM WebSphere Application Server Liberty V17 on a single virtual machine",
       "providerDisplayName": "VMware vSphere",
-      "longDescription": "This template will install the Liberty server single node topology. This template will install either base, core or nd Edition.",
+      "longDescription": "This template deploys a standalone instance of WebSphere Application Server Liberty V17 on a Linux virtual machine. This template can install base, core or nd edition.",
       "bullets": [{
     "title": "Clouds",
     "description": " VMware<br>"},
@@ -34,16 +34,16 @@
     "description": "V1.0<br>"},
 {
     "title": "Operating Systems Supported",
-    "description": "Red Hat Enterprise Linux 7<br>Red Hat Enterprise Linux 6<br>Ubuntu 16.04<br>"},
+    "description": "Red Hat Enterprise Linux 7<br>Red Hat Enterprise Linux 6<br>Ubuntu 16.04<br>Ubuntu 14.04<br>"},
 {
     "title": "Topology",
     "description": "1 virtual machine:<br>  Liberty server - single node<br>"},
 {
     "title": "Software Deployed",
-    "description": "IBM Liberty version 17<br>"},
+    "description": "IBM WebSphere Application Server Liberty V17<br>"},
 {
     "title": "Default Virtual Machine Settings",
-    "description": " vCPU = 1, Memory = 4GB, Storage = 25GB<br>"},
+    "description": " vCPU 2, Memory (GB) 4<br>"},
 {
     "title": "Usage and Special Notes",
     "description": "1. The user is responsible for obtaining appropriate software licenses and downloads prior to template deployment.<br>2. Modify the libertynode_was_liberty_edition variable in CAM Variables to change the installation type to base, core or nd.<br>3. IBM Knowledge Center for WAS Liberty - <a href=\"https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/as_ditamaps/was900_welcome_liberty.html\" target=\"_blank\">https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/as_ditamaps/was900_welcome_liberty.html</a><br>4. IBM Support Portal - <a href=\"https://www.ibm.com/support/home/\" target=\"_blank\">https://www.ibm.com/support/home/</a><br>"}

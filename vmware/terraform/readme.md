@@ -1,9 +1,9 @@
-# Template - IBM WAS Liberty V17 on a single virtual Machine
+# Template - IBM WebSphere Application Server Liberty V17 on a single virtual machine
 Template Version - 1.0
 
 ## Description
 
-This template will install the Liberty server single node topology. This template will install either base, core or nd Edition.<br>
+This template deploys a standalone instance of WebSphere Application Server Liberty V17 on a Linux virtual machine. This template can install base, core or nd edition.<br>
 
 ## Features
 
@@ -20,6 +20,7 @@ V1.0<br>
 Red Hat Enterprise Linux 7<br>
 Red Hat Enterprise Linux 6<br>
 Ubuntu 16.04<br>
+Ubuntu 14.04<br>
 <br>
 ### Topology
 
@@ -28,11 +29,11 @@ Ubuntu 16.04<br>
 <br>
 ### Software Deployed
 
-IBM Liberty version 17<br>
+IBM WebSphere Application Server Liberty V17<br>
 <br>
 ### Default Virtual Machine Settings
 
- vCPU = 1, Memory = 4GB, Storage = 25GB<br>
+ vCPU 2, Memory (GB) 4<br>
 <br>
 ### Usage and Special Notes
 
