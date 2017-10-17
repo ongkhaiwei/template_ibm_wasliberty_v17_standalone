@@ -47,18 +47,6 @@
       "group_name": "environment"
     },
     {
-      "name": "LibertyNode01_was_liberty_liberty_servers_server1_users_admin_user_name",
-      "type": "string",
-      "description": "Liberty administrative user name",
-      "default": "admin",
-      "hidden": false,
-      "label": "Administrative console username used for accessing the console, the associated password is the admin_user password - LibertyNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "libertynode01"
-    },
-    {
       "name": "allow_unverified_ssl",
       "type": "string",
       "description": "Communication with vsphere server with self signed certificate",
@@ -124,18 +112,6 @@
       "required": true,
       "immutable": false,
       "group_name": "virtualmachine"
-    },
-    {
-      "name": "LibertyNode01_was_liberty_liberty_servers_server1_httpport",
-      "type": "string",
-      "description": "Liberty server http port",
-      "default": "9080",
-      "hidden": false,
-      "label": "HTTP Transport value that will be set in the defaultHttpEndpoint endpoint in server.xml - LibertyNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "libertynode01"
     },
     {
       "name": "ibm_pm_access_token",
@@ -234,18 +210,6 @@
       "group_name": "environment"
     },
     {
-      "name": "LibertyNode01_was_liberty_liberty_servers_server1_keystore_id",
-      "type": "string",
-      "description": "Liberty keystore id",
-      "default": "defaultKeyStore",
-      "hidden": false,
-      "label": "Keystore id that will be used when setting up the keyStore attribute in the server.xml - LibertyNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "libertynode01"
-    },
-    {
       "name": "LibertyNode01_was_liberty_edition",
       "type": "string",
       "description": "Indicates which Liberty offering should be installed. Valid values are: base, core, nd",
@@ -272,47 +236,11 @@
       "group_name": "libertynode01"
     },
     {
-      "name": "LibertyNode01_was_liberty_wlp_user_dir",
-      "type": "string",
-      "description": "Liberty directory which product configuration will be written",
-      "default": "/opt/IBM/WebSphere/Liberty/usr",
-      "hidden": false,
-      "label": "Liberty data dir - LibertyNode01",
-      "secured": false,
-      "required": true,
-      "immutable": true,
-      "group_name": "libertynode01"
-    },
-    {
-      "name": "LibertyNode01_was_liberty_install_grp",
-      "type": "string",
-      "description": "Operating system group name that will be assigned to the product installation",
-      "default": "root",
-      "hidden": false,
-      "label": "Liberty group name - LibertyNode01",
-      "secured": false,
-      "required": true,
-      "immutable": true,
-      "group_name": "libertynode01"
-    },
-    {
-      "name": "LibertyNode01_was_liberty_install_user",
-      "type": "string",
-      "description": "Operating system userid that will be used to install the product. Userid will be created if it does not exist",
-      "default": "root",
-      "hidden": false,
-      "label": "Liberty installation userid - LibertyNode01",
-      "secured": false,
-      "required": true,
-      "immutable": true,
-      "group_name": "libertynode01"
-    },
-    {
       "name": "LibertyNode01_was_liberty_liberty_servers_server1_keystore_password",
       "type": "string",
-      "description": "Liberty Keystore password",
+      "description": "Liberty keystore password used to protect the Liberty keystore id, this value will be stored in Chef Vault",
       "hidden": true,
-      "label": "Liberty keystore password used to protect the Liberty keystore id, this value will be stored in Chef Vault - LibertyNode01",
+      "label": "Liberty Keystore password - LibertyNode01",
       "secured": true,
       "regex": "^[!-~]{8,32}$",
       "regexdesc": "Allow 8 to 32 printable ASCII characters except space.",
@@ -321,15 +249,124 @@
       "group_name": "libertynode01"
     },
     {
-      "name": "LibertyNode01_was_liberty_liberty_servers_server1_users_admin_user_role",
+      "name": "LibertyNode01_was_liberty_liberty_servers_server1_users_admin_user_name",
       "type": "string",
-      "description": "liberty admin user role",
+      "description": "Administrative console username used for accessing the console, the associated password is the admin_user password",
       "default": "admin",
       "hidden": false,
-      "label": "Liberty role for which administrative users are to be added to, the admin_user will be added to this role by default - LibertyNode01",
+      "label": "Liberty administrative user name - LibertyNode01",
       "secured": false,
       "required": true,
-      "immutable": true,
+      "immutable": false,
+      "group_name": "libertynode01"
+    },
+    {
+      "name": "LibertyNode01_was_liberty_liberty_servers_server1_users_admin_user_password",
+      "type": "string",
+      "description": "Password for the Liberty administrative user name, this value to be stored in the Chef Vault",
+      "hidden": false,
+      "label": "Liberty administrative user name password - LibertyNode01",
+      "secured": true,
+      "regex": "^[!-~]{8,32}$",
+      "regexdesc": "Allow 8 to 32 printable ASCII characters except space.",
+      "required": true,
+      "immutable": false,
+      "group_name": "libertynode01"
+    },
+    {
+      "name": "LibertyNode01_was_liberty_wlp_user_dir",
+      "type": "string",
+      "description": "Liberty directory which product configuration will be written",
+      "default": "/opt/IBM/WebSphere/Liberty/usr",
+      "hidden": false,
+      "label": "Liberty data dir - LibertyNode01",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "libertynode01"
+    },
+    {
+      "name": "LibertyNode01_was_liberty_liberty_servers_server1_feature",
+      "type": "string",
+      "description": "Lists the Liberty features that should be included in the feature manager list. For example, webProfile-7.0 adminCenter-1.0",
+      "default": "webProfile-7.0 adminCenter-1.0",
+      "hidden": false,
+      "label": "Liberty features that should be included in the server definition - LibertyNode01",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "libertynode01"
+    },
+    {
+      "name": "LibertyNode01_was_liberty_install_grp",
+      "type": "string",
+      "description": "Operating system group name that will be assigned to the product installation",
+      "default": "wasadmin",
+      "hidden": false,
+      "label": "Liberty group name - LibertyNode01",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "libertynode01"
+    },
+    {
+      "name": "LibertyNode01_was_liberty_install_user",
+      "type": "string",
+      "description": "Operating system userid that will be used to install the product. Userid will be created if it does not exist",
+      "default": "wasadmin",
+      "hidden": false,
+      "label": "Liberty installation userid - LibertyNode01",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "libertynode01"
+    },
+    {
+      "name": "LibertyNode01_was_liberty_liberty_servers_server1_keystore_id",
+      "type": "string",
+      "description": "Keystore id that will be used when setting up the keyStore attribute in the server.xml",
+      "default": "defaultKeyStore",
+      "hidden": false,
+      "label": "Liberty keystore id - LibertyNode01",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "libertynode01"
+    },
+    {
+      "name": "LibertyNode01_was_liberty_liberty_servers_server1_httpport",
+      "type": "string",
+      "description": "HTTP Transport value that will be set in the defaultHttpEndpoint endpoint in server.xml",
+      "default": "9080",
+      "hidden": false,
+      "label": "Liberty server http port - LibertyNode01",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "libertynode01"
+    },
+    {
+      "name": "LibertyNode01_was_liberty_liberty_servers_server1_httpsport",
+      "type": "string",
+      "description": "Secure HTTP Transport value that will be set in the defaultHttpEndpoint endpoint in server.xml",
+      "default": "9443",
+      "hidden": false,
+      "label": "Liberty server https port - LibertyNode01",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "libertynode01"
+    },
+    {
+      "name": "LibertyNode01_was_liberty_liberty_servers_server1_name",
+      "type": "string",
+      "description": "Name of the initial Liberty server to be created during provisioning",
+      "default": "defaultServer",
+      "hidden": false,
+      "label": "Liberty server name - LibertyNode01",
+      "secured": false,
+      "required": true,
+      "immutable": false,
       "group_name": "libertynode01"
     },
     {
@@ -339,30 +376,6 @@
       "default": "17.0.2",
       "hidden": false,
       "label": "Liberty version - LibertyNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "libertynode01"
-    },
-    {
-      "name": "LibertyNode01_was_liberty_liberty_servers_server1_feature",
-      "type": "string",
-      "description": "Liberty features that should be included in the server definition",
-      "default": "webProfile-7.0 adminCenter-1.0",
-      "hidden": false,
-      "label": "Lists the Liberty features that should be included in the feature manager list. For example, webProfile-7.0 adminCenter-1.0 - LibertyNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "libertynode01"
-    },
-    {
-      "name": "LibertyNode01_was_liberty_liberty_servers_server1_name",
-      "type": "string",
-      "description": "Liberty server name",
-      "default": "defaultServer",
-      "hidden": false,
-      "label": "Name of the initial Liberty server to be created during provisioning - LibertyNode01",
       "secured": false,
       "required": true,
       "immutable": false,
@@ -402,19 +415,6 @@
       "group_name": "virtualmachine"
     },
     {
-      "name": "LibertyNode01_was_liberty_liberty_servers_server1_users_admin_user_password",
-      "type": "string",
-      "description": "Liberty administrative user name password",
-      "hidden": false,
-      "label": "Password for the Liberty administrative user name, this value to be stored in the Chef Vault - LibertyNode01",
-      "secured": true,
-      "regex": "^[!-~]{8,32}$",
-      "regexdesc": "Allow 8 to 32 printable ASCII characters except space.",
-      "required": true,
-      "immutable": false,
-      "group_name": "libertynode01"
-    },
-    {
       "name": "ibm_pm_private_ssh_key",
       "type": "string",
       "description": "Private CAMC SSH key (base64 encoded) used to connect to the virtual guest.",
@@ -437,18 +437,6 @@
       "immutable": false,
       "group_name": "environment",
       "default": "${advanced_content_runtime_chef.ibm_pm_public_ssh_key}"
-    },
-    {
-      "name": "LibertyNode01_was_liberty_liberty_servers_server1_httpsport",
-      "type": "string",
-      "description": "Liberty server https port",
-      "default": "9443",
-      "hidden": false,
-      "label": "Secure HTTP Transport value that will be set in the defaultHttpEndpoint endpoint in server.xml - LibertyNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "libertynode01"
     },
     {
       "name": "LibertyNode01-name",
@@ -612,6 +600,18 @@
       "default": "/opt/IBM/WebSphere/Liberty",
       "hidden": false,
       "label": "WebSphere product installation directory - LibertyNode01",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "libertynode01"
+    },
+    {
+      "name": "LibertyNode01_was_liberty_liberty_servers_server1_users_admin_user_role",
+      "type": "string",
+      "description": "Liberty role for which administrative users are to be added to, the admin_user will be added to this role by default",
+      "default": "admin",
+      "hidden": false,
+      "label": "liberty admin user role - LibertyNode01",
       "secured": false,
       "required": true,
       "immutable": false,

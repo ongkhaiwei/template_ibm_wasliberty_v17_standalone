@@ -160,61 +160,61 @@ variable "LibertyNode01_was_liberty_install_user" {
 #Variable : LibertyNode01_was_liberty_liberty_servers_server1_feature
 variable "LibertyNode01_was_liberty_liberty_servers_server1_feature" {
   type = "string"
-  description = "Liberty features that should be included in the server definition"
+  description = "Lists the Liberty features that should be included in the feature manager list. For example, webProfile-7.0 adminCenter-1.0"
   default = "webProfile-7.0 adminCenter-1.0"
 }
 
 #Variable : LibertyNode01_was_liberty_liberty_servers_server1_httpport
 variable "LibertyNode01_was_liberty_liberty_servers_server1_httpport" {
   type = "string"
-  description = "Liberty server http port"
+  description = "HTTP Transport value that will be set in the defaultHttpEndpoint endpoint in server.xml"
   default = "9080"
 }
 
 #Variable : LibertyNode01_was_liberty_liberty_servers_server1_httpsport
 variable "LibertyNode01_was_liberty_liberty_servers_server1_httpsport" {
   type = "string"
-  description = "Liberty server https port"
+  description = "Secure HTTP Transport value that will be set in the defaultHttpEndpoint endpoint in server.xml"
   default = "9443"
 }
 
 #Variable : LibertyNode01_was_liberty_liberty_servers_server1_keystore_id
 variable "LibertyNode01_was_liberty_liberty_servers_server1_keystore_id" {
   type = "string"
-  description = "Liberty keystore id"
+  description = "Keystore id that will be used when setting up the keyStore attribute in the server.xml"
   default = "defaultKeyStore"
 }
 
 #Variable : LibertyNode01_was_liberty_liberty_servers_server1_keystore_password
 variable "LibertyNode01_was_liberty_liberty_servers_server1_keystore_password" {
   type = "string"
-  description = "Liberty Keystore password"
+  description = "Liberty keystore password used to protect the Liberty keystore id, this value will be stored in Chef Vault"
 }
 
 #Variable : LibertyNode01_was_liberty_liberty_servers_server1_name
 variable "LibertyNode01_was_liberty_liberty_servers_server1_name" {
   type = "string"
-  description = "Liberty server name"
+  description = "Name of the initial Liberty server to be created during provisioning"
   default = "defaultServer"
 }
 
 #Variable : LibertyNode01_was_liberty_liberty_servers_server1_users_admin_user_name
 variable "LibertyNode01_was_liberty_liberty_servers_server1_users_admin_user_name" {
   type = "string"
-  description = "Liberty administrative user name"
+  description = "Administrative console username used for accessing the console, the associated password is the admin_user password"
   default = "admin"
 }
 
 #Variable : LibertyNode01_was_liberty_liberty_servers_server1_users_admin_user_password
 variable "LibertyNode01_was_liberty_liberty_servers_server1_users_admin_user_password" {
   type = "string"
-  description = "Liberty administrative user name password"
+  description = "Password for the Liberty administrative user name, this value to be stored in the Chef Vault"
 }
 
 #Variable : LibertyNode01_was_liberty_liberty_servers_server1_users_admin_user_role
 variable "LibertyNode01_was_liberty_liberty_servers_server1_users_admin_user_role" {
   type = "string"
-  description = "liberty admin user role"
+  description = "Liberty role for which administrative users are to be added to, the admin_user will be added to this role by default"
   default = "admin"
 }
 
