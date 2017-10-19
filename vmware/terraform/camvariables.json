@@ -239,7 +239,7 @@
       "name": "LibertyNode01_was_liberty_liberty_servers_server1_keystore_password",
       "type": "string",
       "description": "Liberty keystore password used to protect the Liberty keystore id, this value will be stored in Chef Vault",
-      "hidden": true,
+      "hidden": false,
       "label": "Liberty Keystore password - LibertyNode01",
       "secured": true,
       "regex": "^[!-~]{8,32}$",
@@ -422,7 +422,7 @@
       "label": "Private CAMC SSH key (base64 encoded) used to connect to the virtual guest.",
       "secured": true,
       "required": true,
-      "immutable": true,
+      "immutable": false,
       "group_name": "environment",
       "default": "${advanced_content_runtime_chef.ibm_pm_private_ssh_key}"
     },
