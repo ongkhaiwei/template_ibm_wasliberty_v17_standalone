@@ -1,7 +1,7 @@
 {
     "name": "IBM WebSphere Application Server Liberty V17 on a single virtual machine - VMware vSphere",
     "description": "This template deploys a standalone instance of WebSphere Application Server Liberty V17 on a Linux virtual machine. This template can install base, core or nd edition.",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "imageUrl": "",
     "image": "",
     "type": "chefcontent",
