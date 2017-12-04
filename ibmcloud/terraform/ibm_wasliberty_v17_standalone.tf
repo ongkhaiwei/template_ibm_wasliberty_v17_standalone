@@ -9,33 +9,28 @@
 # This is a terraform generated template generated from ibm_wasliberty_v17_standalone
 
 ##############################################################
-# Keys - CAMC (public/private) & optional User Key (public) 
+# Keys - CAMC (public/private) & optional User Key (public)
 ##############################################################
-variable "user_public_ssh_key" {
-  type = "string"
-  description = "User defined public SSH key used to connect to the virtual machine. The format must be in openSSH."
-  default = "None"
-}
-
-variable "ibm_pm_public_ssh_key" {
-  description = "Public CAMC SSH key value which is used to connect to a guest, used on VMware only."
+variable "ibm_pm_public_ssh_key_name" {
+  description = "Public CAMC SSH key name used to connect to the virtual guest."
 }
 
 variable "ibm_pm_private_ssh_key" {
   description = "Private CAMC SSH key (base64 encoded) used to connect to the virtual guest."
 }
 
-variable "allow_unverified_ssl" {
-  description = "Communication with vsphere server with self signed certificate"
-  default = "true"
+variable "user_public_ssh_key" {
+  type        = "string"
+  description = "User defined public SSH key used to connect to the virtual machine. The format must be in openSSH."
+  default     = "None"
 }
 
 ##############################################################
-# Define the vsphere provider 
+# Define the ibm provider
 ##############################################################
-provider "vsphere" {
-  allow_unverified_ssl = "${var.allow_unverified_ssl}"
-  version = "~> 0.4"
+#define the ibm provider
+provider "ibm" {
+  version = "~> 0.5"
 }
 
 provider "camc" {
@@ -46,12 +41,20 @@ provider "random" {
   version = "~> 1.0"
 }
 
+##############################################################
+# Reference public key in Devices>Manage>SSH Keys in SL console)
+##############################################################
+data "ibm_compute_ssh_key" "ibm_pm_public_key" {
+  label       = "${var.ibm_pm_public_ssh_key_name}"
+  most_recent = "true"
+}
+
 resource "random_id" "stack_id" {
   byte_length = "16"
 }
 
 ##############################################################
-# Define pattern variables 
+# Define pattern variables
 ##############################################################
 ##### unique stack name #####
 variable "ibm_stack_name" {
@@ -59,310 +62,295 @@ variable "ibm_stack_name" {
 }
 
 #### Default OS Admin User Map ####
+variable "default_os_admin_user" {
+  type        = "map"
+  description = "look up os_admin_user using resource image"
+
+  default = {
+    UBUNTU_16_64 = "root"
+    REDHAT_7_64  = "root"
+  }
+}
 
 ##### Environment variables #####
 #Variable : ibm_im_repo
 variable "ibm_im_repo" {
-  type = "string"
+  type        = "string"
   description = "IBM Software  Installation Manager Repository URL (https://<hostname/IP>:<port>/IMRepo) "
 }
 
 #Variable : ibm_im_repo_password
 variable "ibm_im_repo_password" {
-  type = "string"
+  type        = "string"
   description = "IBM Software  Installation Manager Repository Password"
 }
 
 #Variable : ibm_im_repo_user
 variable "ibm_im_repo_user" {
-  type = "string"
+  type        = "string"
   description = "IBM Software  Installation Manager Repository username"
-  default = "repouser"
+  default     = "repouser"
 }
 
 #Variable : ibm_pm_access_token
 variable "ibm_pm_access_token" {
-  type = "string"
+  type        = "string"
   description = "IBM Pattern Manager Access Token"
 }
 
 #Variable : ibm_pm_service
 variable "ibm_pm_service" {
-  type = "string"
+  type        = "string"
   description = "IBM Pattern Manager Service"
 }
 
 #Variable : ibm_sw_repo
 variable "ibm_sw_repo" {
-  type = "string"
+  type        = "string"
   description = "IBM Software Repo Root (https://<hostname>:<port>)"
 }
 
 #Variable : ibm_sw_repo_password
 variable "ibm_sw_repo_password" {
-  type = "string"
+  type        = "string"
   description = "IBM Software Repo Password"
 }
 
 #Variable : ibm_sw_repo_user
 variable "ibm_sw_repo_user" {
-  type = "string"
+  type        = "string"
   description = "IBM Software Repo Username"
-  default = "repouser"
+  default     = "repouser"
 }
-
 
 ##### LibertyNode01 variables #####
 #Variable : LibertyNode01-image
 variable "LibertyNode01-image" {
-  type = "string"
+  type        = "string"
   description = "Operating system image id / template that should be used when creating the virtual image"
+  default     = "REDHAT_7_64"
+}
+
+#Variable : LibertyNode01-mgmt-network-public
+variable "LibertyNode01-mgmt-network-public" {
+  type        = "string"
+  description = "Expose and use public IP of virtual machine for internal communication"
+  default     = "true"
 }
 
 #Variable : LibertyNode01-name
 variable "LibertyNode01-name" {
-  type = "string"
+  type        = "string"
   description = "Short hostname of virtual machine"
 }
 
 #Variable : LibertyNode01-os_admin_user
 variable "LibertyNode01-os_admin_user" {
-  type = "string"
+  type        = "string"
   description = "Name of the admin user account in the virtual machine that will be accessed via SSH"
 }
 
 #Variable : LibertyNode01_was_liberty_base_version
 variable "LibertyNode01_was_liberty_base_version" {
-  type = "string"
+  type        = "string"
   description = "The release and fixpack level for WebSphere Liberty to be installed. Example formats are 8.5.5.11 or 17.0.2"
-  default = "17.0.2"
+  default     = "17.0.2"
 }
 
 #Variable : LibertyNode01_was_liberty_edition
 variable "LibertyNode01_was_liberty_edition" {
-  type = "string"
+  type        = "string"
   description = "Indicates which Liberty offering should be installed. Valid values are: base, core, nd"
-  default = "base"
+  default     = "base"
 }
 
 #Variable : LibertyNode01_was_liberty_install_dir
 variable "LibertyNode01_was_liberty_install_dir" {
-  type = "string"
+  type        = "string"
   description = "The installation root directory for the WebSphere Liberty product binaries"
-  default = "/opt/IBM/WebSphere/Liberty"
+  default     = "/opt/IBM/WebSphere/Liberty"
 }
 
 #Variable : LibertyNode01_was_liberty_install_grp
 variable "LibertyNode01_was_liberty_install_grp" {
-  type = "string"
+  type        = "string"
   description = "Operating system group name that will be assigned to the product installation"
-  default = "root"
+  default     = "root"
 }
 
 #Variable : LibertyNode01_was_liberty_install_user
 variable "LibertyNode01_was_liberty_install_user" {
-  type = "string"
+  type        = "string"
   description = "Operating system userid that will be used to install the product. Userid will be created if it does not exist"
-  default = "root"
+  default     = "root"
 }
 
 #Variable : LibertyNode01_was_liberty_liberty_servers_server1_feature
 variable "LibertyNode01_was_liberty_liberty_servers_server1_feature" {
-  type = "string"
+  type        = "string"
   description = "Lists the Liberty features that should be included in the feature manager list. For example, webProfile-7.0 adminCenter-1.0"
-  default = "webProfile-7.0 adminCenter-1.0"
+  default     = "webProfile-7.0 adminCenter-1.0"
 }
 
 #Variable : LibertyNode01_was_liberty_liberty_servers_server1_httpport
 variable "LibertyNode01_was_liberty_liberty_servers_server1_httpport" {
-  type = "string"
+  type        = "string"
   description = "HTTP Transport value that will be set in the defaultHttpEndpoint endpoint in server.xml"
-  default = "9080"
+  default     = "9080"
 }
 
 #Variable : LibertyNode01_was_liberty_liberty_servers_server1_httpsport
 variable "LibertyNode01_was_liberty_liberty_servers_server1_httpsport" {
-  type = "string"
+  type        = "string"
   description = "Secure HTTP Transport value that will be set in the defaultHttpEndpoint endpoint in server.xml"
-  default = "9443"
+  default     = "9443"
 }
 
 #Variable : LibertyNode01_was_liberty_liberty_servers_server1_keystore_id
 variable "LibertyNode01_was_liberty_liberty_servers_server1_keystore_id" {
-  type = "string"
+  type        = "string"
   description = "Keystore id that will be used when setting up the keyStore attribute in the server.xml"
-  default = "defaultKeyStore"
+  default     = "defaultKeyStore"
 }
 
 #Variable : LibertyNode01_was_liberty_liberty_servers_server1_keystore_password
 variable "LibertyNode01_was_liberty_liberty_servers_server1_keystore_password" {
-  type = "string"
+  type        = "string"
   description = "Liberty keystore password used to protect the Liberty keystore id, this value will be stored in Chef Vault"
 }
 
 #Variable : LibertyNode01_was_liberty_liberty_servers_server1_name
 variable "LibertyNode01_was_liberty_liberty_servers_server1_name" {
-  type = "string"
+  type        = "string"
   description = "Name of the initial Liberty server to be created during provisioning"
-  default = "defaultServer"
+  default     = "defaultServer"
 }
 
 #Variable : LibertyNode01_was_liberty_liberty_servers_server1_users_admin_user_name
 variable "LibertyNode01_was_liberty_liberty_servers_server1_users_admin_user_name" {
-  type = "string"
+  type        = "string"
   description = "Administrative console username used for accessing the console, the associated password is the admin_user password"
-  default = "admin"
+  default     = "admin"
 }
 
 #Variable : LibertyNode01_was_liberty_liberty_servers_server1_users_admin_user_password
 variable "LibertyNode01_was_liberty_liberty_servers_server1_users_admin_user_password" {
-  type = "string"
+  type        = "string"
   description = "Password for the Liberty administrative user name, this value to be stored in the Chef Vault"
 }
 
 #Variable : LibertyNode01_was_liberty_liberty_servers_server1_users_admin_user_role
 variable "LibertyNode01_was_liberty_liberty_servers_server1_users_admin_user_role" {
-  type = "string"
+  type        = "string"
   description = "Liberty role for which administrative users are to be added to, the admin_user will be added to this role by default"
-  default = "admin"
+  default     = "admin"
 }
 
 #Variable : LibertyNode01_was_liberty_wlp_user_dir
 variable "LibertyNode01_was_liberty_wlp_user_dir" {
-  type = "string"
+  type        = "string"
   description = "Liberty directory which product configuration will be written"
-  default = "/opt/IBM/WebSphere/Liberty/usr"
+  default     = "/opt/IBM/WebSphere/Liberty/usr"
 }
 
-
 ##### ungrouped variables #####
+##### domain name #####
+variable "runtime_domain" {
+  description = "domain name"
+  default     = "cam.ibm.com"
+}
 
 #########################################################
 ##### Resource : LibertyNode01
 #########################################################
 
-variable "LibertyNode01-os_password" {
-  type = "string"
-  description = "Operating System Password for the Operating System User to access virtual machine"
-}
-
-variable "LibertyNode01_folder" {
-  description = "Target vSphere folder for virtual machine"
-}
-
+#Parameter : LibertyNode01_datacenter
 variable "LibertyNode01_datacenter" {
-  description = "Target vSphere datacenter for virtual machine creation"
+  type        = "string"
+  description = "IBMCloud datacenter where infrastructure resources will be deployed"
+  default     = "dal05"
 }
 
-variable "LibertyNode01_domain" {
-  description = "Domain Name of virtual machine"
+#Parameter : LibertyNode01_private_network_only
+variable "LibertyNode01_private_network_only" {
+  type        = "string"
+  description = "Provision the virtual machine with only private IP"
+  default     = "false"
 }
 
-variable "LibertyNode01_number_of_vcpu" {
-  description = "Number of virtual CPU for the virtual machine, which is required to be a positive Integer"
-  default = "2"
+#Parameter : LibertyNode01_number_of_cores
+variable "LibertyNode01_number_of_cores" {
+  type        = "string"
+  description = "Number of CPU cores, which is required to be a positive Integer"
+  default     = "2"
 }
 
+#Parameter : LibertyNode01_memory
 variable "LibertyNode01_memory" {
-  description = "Memory assigned to the virtual machine in megabytes. This value is required to be an increment of 1024"
-  default = "2048"
+  type        = "string"
+  description = "Amount of Memory (MBs), which is required to be one or more times of 1024"
+  default     = "4096"
 }
 
-variable "LibertyNode01_cluster" {
-  description = "Target vSphere cluster to host the virtual machine"
+#Parameter : LibertyNode01_network_speed
+variable "LibertyNode01_network_speed" {
+  type        = "string"
+  description = "Bandwidth of network communication applied to the virtual machine"
+  default     = "10"
 }
 
-variable "LibertyNode01_dns_suffixes" {
-  type = "list"
-  description = "Name resolution suffixes for the virtual network adapter"
+#Parameter : LibertyNode01_hourly_billing
+variable "LibertyNode01_hourly_billing" {
+  type        = "string"
+  description = "Billing cycle: hourly billed or monthly billed"
+  default     = "true"
 }
 
-variable "LibertyNode01_dns_servers" {
-  type = "list"
-  description = "DNS servers for the virtual network adapter"
+#Parameter : LibertyNode01_dedicated_acct_host_only
+variable "LibertyNode01_dedicated_acct_host_only" {
+  type        = "string"
+  description = "Shared or dedicated host, where dedicated host usually means higher performance and cost"
+  default     = "false"
 }
 
-variable "LibertyNode01_network_interface_label" {
-  description = "vSphere port group or network label for virtual machine's vNIC"
+#Parameter : LibertyNode01_local_disk
+variable "LibertyNode01_local_disk" {
+  type        = "string"
+  description = "User local disk or SAN disk"
+  default     = "false"
 }
 
-variable "LibertyNode01_ipv4_gateway" {
-  description = "IPv4 gateway for vNIC configuration"
+variable "LibertyNode01_root_disk_size" {
+  type        = "string"
+  description = "Root Disk Size - LibertyNode01"
+  default     = "25"
 }
 
-variable "LibertyNode01_ipv4_address" {
-  description = "IPv4 address for vNIC configuration"
-}
+resource "ibm_compute_vm_instance" "LibertyNode01" {
+  hostname                 = "${var.LibertyNode01-name}"
+  os_reference_code        = "${var.LibertyNode01-image}"
+  domain                   = "${var.runtime_domain}"
+  datacenter               = "${var.LibertyNode01_datacenter}"
+  network_speed            = "${var.LibertyNode01_network_speed}"
+  hourly_billing           = "${var.LibertyNode01_hourly_billing}"
+  private_network_only     = "${var.LibertyNode01_private_network_only}"
+  cores                    = "${var.LibertyNode01_number_of_cores}"
+  memory                   = "${var.LibertyNode01_memory}"
+  disks                    = ["${var.LibertyNode01_root_disk_size}"]
+  dedicated_acct_host_only = "${var.LibertyNode01_dedicated_acct_host_only}"
+  local_disk               = "${var.LibertyNode01_local_disk}"
+  ssh_key_ids              = ["${data.ibm_compute_ssh_key.ibm_pm_public_key.id}"]
 
-variable "LibertyNode01_ipv4_prefix_length" {
-  description = "IPv4 prefix length for vNIC configuration. The value must be a number between 8 and 32"
-}
-
-variable "LibertyNode01_adapter_type" {
-  description = "Network adapter type for vNIC Configuration"
-  default = "vmxnet3"
-}
-
-variable "LibertyNode01_root_disk_datastore" {
-  description = "Data store or storage cluster name for target virtual machine's disks"
-}
-
-variable "LibertyNode01_root_disk_type" {
-  type = "string"
-  description = "Type of template disk volume"
-  default = "eager_zeroed"
-}
-
-variable "LibertyNode01_root_disk_controller_type" {
-  type = "string"
-  description = "Type of template disk controller"
-  default = "scsi"
-}
-
-variable "LibertyNode01_root_disk_keep_on_remove" {
-  type = "string"
-  description = "Delete template disk volume when the virtual machine is deleted"
-  default = "false"
-}
-
-# vsphere vm
-resource "vsphere_virtual_machine" "LibertyNode01" {
-  name = "${var.LibertyNode01-name}"
-  domain = "${var.LibertyNode01_domain}"
-  folder = "${var.LibertyNode01_folder}"
-  datacenter = "${var.LibertyNode01_datacenter}"
-  vcpu = "${var.LibertyNode01_number_of_vcpu}"
-  memory = "${var.LibertyNode01_memory}"
-  cluster = "${var.LibertyNode01_cluster}"
-  dns_suffixes = "${var.LibertyNode01_dns_suffixes}"
-  dns_servers = "${var.LibertyNode01_dns_servers}"
-
-  network_interface {
-    label = "${var.LibertyNode01_network_interface_label}"
-    ipv4_gateway = "${var.LibertyNode01_ipv4_gateway}"
-    ipv4_address = "${var.LibertyNode01_ipv4_address}"
-    ipv4_prefix_length = "${var.LibertyNode01_ipv4_prefix_length}"
-    adapter_type = "${var.LibertyNode01_adapter_type}"
-  }
-
-  disk {
-    type = "${var.LibertyNode01_root_disk_type}"
-    template = "${var.LibertyNode01-image}"
-    datastore = "${var.LibertyNode01_root_disk_datastore}"
-    keep_on_remove = "${var.LibertyNode01_root_disk_keep_on_remove}"
-    controller_type = "${var.LibertyNode01_root_disk_controller_type}"
-  }
-
-  # Specify the connection
+  # Specify the ssh connection
   connection {
-    type = "ssh"
-    user = "${var.LibertyNode01-os_admin_user}"
-    password = "${var.LibertyNode01-os_password}"
+    user        = "${var.LibertyNode01-os_admin_user == "" ? lookup(var.default_os_admin_user, var.LibertyNode01-image) : var.LibertyNode01-os_admin_user}"
+    private_key = "${base64decode(var.ibm_pm_private_ssh_key)}"
   }
 
   provisioner "file" {
     destination = "LibertyNode01_add_ssh_key.sh"
-    content     = <<EOF
+
+    content = <<EOF
 # =================================================================
 # Licensed Materials - Property of IBM
 # 5737-E67
@@ -372,47 +360,34 @@ resource "vsphere_virtual_machine" "LibertyNode01" {
 # =================================================================
 #!/bin/bash
 
-if (( $# != 3 )); then
-echo "usage: arg 1 is user, arg 2 is public key, arg3 is CAMC Public Key"
-exit -1
+if (( $# != 2 )); then
+    echo "usage: arg 1 is user, arg 2 is public key"
+    exit -1
 fi
 
-userid="$1"
-ssh_key="$2"
-camc_ssh_key="$3"
+userid=$1
+ssh_key=$2
+
+if [[ $ssh_key = 'None' ]]; then
+  echo "skipping add, 'None' specified"
+  exit 0
+fi
 
 user_home=$(eval echo "~$userid")
 user_auth_key_file=$user_home/.ssh/authorized_keys
-echo "$user_auth_key_file"
 if ! [ -f $user_auth_key_file ]; then
-echo "$user_auth_key_file does not exist on this system, creating."
-mkdir $user_home/.ssh
-chmod 700 $user_home/.ssh
-touch $user_home/.ssh/authorized_keys
-chmod 600 $user_home/.ssh/authorized_keys
+  echo "$user_auth_key_file does not exist on this system"
+  exit -1
 else
-echo "user_home : $user_home"
+  echo "user_home --> $user_home"
 fi
 
-if [[ $ssh_key = 'None' ]]; then
-echo "skipping user key add, 'None' specified"
-else
-echo "$user_auth_key_file"
-echo "$ssh_key" >> "$user_auth_key_file"
+echo $ssh_key >> $user_auth_key_file
 if [ $? -ne 0 ]; then
-echo "failed to add to $user_auth_key_file"
-exit -1
+  echo "failed to add to $user_auth_key_file"
+  exit -1
 else
-echo "updated $user_auth_key_file"
-fi
-fi
-
-echo "$camc_ssh_key" >> "$user_auth_key_file"
-if [ $? -ne 0 ]; then
-echo "failed to add to $user_auth_key_file"
-exit -1
-else
-echo "updated $user_auth_key_file"
+  echo "updated $user_auth_key_file"
 fi
 
 EOF
@@ -422,10 +397,9 @@ EOF
   provisioner "remote-exec" {
     inline = [
       "bash -c 'chmod +x LibertyNode01_add_ssh_key.sh'",
-      "bash -c './LibertyNode01_add_ssh_key.sh  \"${var.LibertyNode01-os_admin_user}\" \"${var.user_public_ssh_key}\" \"${var.ibm_pm_public_ssh_key}\">> LibertyNode01_add_ssh_key.log 2>&1'"
+      "bash -c './LibertyNode01_add_ssh_key.sh  \"${var.LibertyNode01-os_admin_user}\" \"${var.user_public_ssh_key}\">> LibertyNode01_add_ssh_key.log 2>&1'",
     ]
   }
-
 }
 
 #########################################################
@@ -433,18 +407,19 @@ EOF
 #########################################################
 
 resource "camc_bootstrap" "LibertyNode01_chef_bootstrap_comp" {
-  depends_on = ["camc_vaultitem.VaultItem","vsphere_virtual_machine.LibertyNode01"]
-  name = "LibertyNode01_chef_bootstrap_comp"
-  camc_endpoint = "${var.ibm_pm_service}/v1/bootstrap/chef"
-  access_token = "${var.ibm_pm_access_token}"
+  depends_on      = ["camc_vaultitem.VaultItem", "ibm_compute_vm_instance.LibertyNode01"]
+  name            = "LibertyNode01_chef_bootstrap_comp"
+  camc_endpoint   = "${var.ibm_pm_service}/v1/bootstrap/chef"
+  access_token    = "${var.ibm_pm_access_token}"
   skip_ssl_verify = true
-  trace = true
+  trace           = true
+
   data = <<EOT
 {
-  "os_admin_user": "${var.LibertyNode01-os_admin_user}",
+  "os_admin_user": "${var.LibertyNode01-os_admin_user == "default"? lookup(var.default_os_admin_user, var.LibertyNode01-image) : var.LibertyNode01-os_admin_user}",
   "stack_id": "${random_id.stack_id.hex}",
   "environment_name": "_default",
-  "host_ip": "${vsphere_virtual_machine.LibertyNode01.network_interface.0.ipv4_address}",
+  "host_ip": "${var.LibertyNode01-mgmt-network-public == "false" ? ibm_compute_vm_instance.LibertyNode01.ipv4_address_private : ibm_compute_vm_instance.LibertyNode01.ipv4_address}",
   "node_name": "${var.LibertyNode01-name}",
   "node_attributes": {
     "ibm_internal": {
@@ -460,24 +435,24 @@ resource "camc_bootstrap" "LibertyNode01_chef_bootstrap_comp" {
 EOT
 }
 
-
 #########################################################
 ##### Resource : LibertyNode01_liberty_create_server
 #########################################################
 
 resource "camc_softwaredeploy" "LibertyNode01_liberty_create_server" {
-  depends_on = ["camc_softwaredeploy.LibertyNode01_liberty_install"]
-  name = "LibertyNode01_liberty_create_server"
-  camc_endpoint = "${var.ibm_pm_service}/v1/software_deployment/chef"
-  access_token = "${var.ibm_pm_access_token}"
+  depends_on      = ["camc_softwaredeploy.LibertyNode01_liberty_install"]
+  name            = "LibertyNode01_liberty_create_server"
+  camc_endpoint   = "${var.ibm_pm_service}/v1/software_deployment/chef"
+  access_token    = "${var.ibm_pm_access_token}"
   skip_ssl_verify = true
-  trace = true
+  trace           = true
+
   data = <<EOT
 {
-  "os_admin_user": "${var.LibertyNode01-os_admin_user}",
+  "os_admin_user": "${var.LibertyNode01-os_admin_user == "default"? lookup(var.default_os_admin_user, var.LibertyNode01-image) : var.LibertyNode01-os_admin_user}",
   "stack_id": "${random_id.stack_id.hex}",
   "environment_name": "_default",
-  "host_ip": "${vsphere_virtual_machine.LibertyNode01.network_interface.0.ipv4_address}",
+  "host_ip": "${var.LibertyNode01-mgmt-network-public == "false" ? ibm_compute_vm_instance.LibertyNode01.ipv4_address_private : ibm_compute_vm_instance.LibertyNode01.ipv4_address}",
   "node_name": "${var.LibertyNode01-name}",
   "runlist": "role[liberty_create_server]",
   "node_attributes": {
@@ -527,24 +502,24 @@ resource "camc_softwaredeploy" "LibertyNode01_liberty_create_server" {
 EOT
 }
 
-
 #########################################################
 ##### Resource : LibertyNode01_liberty_install
 #########################################################
 
 resource "camc_softwaredeploy" "LibertyNode01_liberty_install" {
-  depends_on = ["camc_bootstrap.LibertyNode01_chef_bootstrap_comp"]
-  name = "LibertyNode01_liberty_install"
-  camc_endpoint = "${var.ibm_pm_service}/v1/software_deployment/chef"
-  access_token = "${var.ibm_pm_access_token}"
+  depends_on      = ["camc_bootstrap.LibertyNode01_chef_bootstrap_comp"]
+  name            = "LibertyNode01_liberty_install"
+  camc_endpoint   = "${var.ibm_pm_service}/v1/software_deployment/chef"
+  access_token    = "${var.ibm_pm_access_token}"
   skip_ssl_verify = true
-  trace = true
+  trace           = true
+
   data = <<EOT
 {
-  "os_admin_user": "${var.LibertyNode01-os_admin_user}",
+  "os_admin_user": "${var.LibertyNode01-os_admin_user == "default"? lookup(var.default_os_admin_user, var.LibertyNode01-image) : var.LibertyNode01-os_admin_user}",
   "stack_id": "${random_id.stack_id.hex}",
   "environment_name": "_default",
-  "host_ip": "${vsphere_virtual_machine.LibertyNode01.network_interface.0.ipv4_address}",
+  "host_ip": "${var.LibertyNode01-mgmt-network-public == "false" ? ibm_compute_vm_instance.LibertyNode01.ipv4_address_private : ibm_compute_vm_instance.LibertyNode01.ipv4_address}",
   "node_name": "${var.LibertyNode01-name}",
   "runlist": "role[liberty_install]",
   "node_attributes": {
@@ -580,16 +555,16 @@ resource "camc_softwaredeploy" "LibertyNode01_liberty_install" {
 EOT
 }
 
-
 #########################################################
 ##### Resource : VaultItem
 #########################################################
 
 resource "camc_vaultitem" "VaultItem" {
-  camc_endpoint = "${var.ibm_pm_service}/v1/vault_item/chef"
-  access_token = "${var.ibm_pm_access_token}"
+  camc_endpoint   = "${var.ibm_pm_service}/v1/vault_item/chef"
+  access_token    = "${var.ibm_pm_access_token}"
   skip_ssl_verify = true
-  trace = true
+  trace           = true
+
   data = <<EOT
 {
   "vault_content": {
@@ -602,7 +577,7 @@ EOT
 }
 
 output "LibertyNode01_ip" {
-  value = "VM IP Address : ${vsphere_virtual_machine.LibertyNode01.network_interface.0.ipv4_address}"
+  value = "Private : ${ibm_compute_vm_instance.LibertyNode01.ipv4_address_private} & Public : ${ibm_compute_vm_instance.LibertyNode01.ipv4_address}"
 }
 
 output "LibertyNode01_name" {
@@ -616,4 +591,3 @@ output "LibertyNode01_roles" {
 output "stack_id" {
   value = "${random_id.stack_id.hex}"
 }
-
