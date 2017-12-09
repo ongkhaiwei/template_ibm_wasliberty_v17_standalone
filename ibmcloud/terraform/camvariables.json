@@ -12,10 +12,6 @@
       "label": "Cloud Input Variables"
     },
     {
-      "name": "virtualmachine",
-      "label": "Virtual Machine Input Variables"
-    },
-    {
       "name": "ssh_keys",
       "label": "SSH Keys"
     },
@@ -28,8 +24,8 @@
       "label": "LibertyNode01"
     },
     {
-      "name": "ungrouped",
-      "label": "ungrouped"
+      "name": "virtualmachine",
+      "label": "Virtual Machine Input Variables"
     }
   ],
   "output_groups": [
@@ -145,30 +141,6 @@
       "required": true,
       "immutable": true,
       "group_name": "environment"
-    },
-    {
-      "name": "LibertyNode01_local_disk",
-      "type": "string",
-      "description": "User local disk or SAN disk",
-      "default": "false",
-      "hidden": false,
-      "label": "IBMCloud - Local / SAN Disk - LibertyNode01",
-      "secured": false,
-      "options": [
-        {
-          "value": "true",
-          "label": "True"
-        },
-        {
-          "value": "false",
-          "label": "False",
-          "default": "true"
-        }
-      ],
-      "required": true,
-      "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "libertynode01"
     },
     {
       "name": "LibertyNode01_datacenter",
@@ -307,8 +279,7 @@
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "libertynode01"
+      "group_name": "cloud"
     },
     {
       "name": "LibertyNode01_dedicated_acct_host_only",
@@ -331,8 +302,7 @@
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "libertynode01"
+      "group_name": "cloud"
     },
     {
       "name": "LibertyNode01_hourly_billing",
@@ -355,8 +325,7 @@
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "libertynode01"
+      "group_name": "cloud"
     },
     {
       "name": "LibertyNode01_network_speed",
@@ -379,8 +348,7 @@
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "libertynode01"
+      "group_name": "cloud"
     },
     {
       "name": "LibertyNode01_private_network_only",
@@ -403,8 +371,7 @@
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "libertynode01"
+      "group_name": "cloud"
     },
     {
       "name": "LibertyNode01_memory",
@@ -447,8 +414,7 @@
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "libertynode01"
+      "group_name": "cloud"
     },
     {
       "name": "LibertyNode01_number_of_cores",
@@ -491,8 +457,7 @@
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "libertynode01"
+      "group_name": "cloud"
     },
     {
       "name": "LibertyNode01_was_liberty_edition",
@@ -519,7 +484,6 @@
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
       "group_name": "libertynode01"
     },
     {
@@ -533,7 +497,6 @@
       "regexdesc": "Allow 8 to 32 printable ASCII characters except space.",
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
       "group_name": "libertynode01"
     },
     {
@@ -546,7 +509,6 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
       "group_name": "libertynode01"
     },
     {
@@ -560,7 +522,6 @@
       "regexdesc": "Allow 8 to 32 printable ASCII characters except space.",
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
       "group_name": "libertynode01"
     },
     {
@@ -573,7 +534,6 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
       "group_name": "libertynode01"
     },
     {
@@ -586,7 +546,6 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
       "group_name": "libertynode01"
     },
     {
@@ -599,7 +558,6 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
       "group_name": "libertynode01"
     },
     {
@@ -612,7 +570,6 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
       "group_name": "libertynode01"
     },
     {
@@ -625,7 +582,6 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
       "group_name": "libertynode01"
     },
     {
@@ -638,7 +594,6 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
       "group_name": "libertynode01"
     },
     {
@@ -651,7 +606,6 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
       "group_name": "libertynode01"
     },
     {
@@ -664,7 +618,6 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
       "group_name": "libertynode01"
     },
     {
@@ -677,7 +630,6 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
       "group_name": "libertynode01"
     },
     {
@@ -714,18 +666,17 @@
       "options": [
         {
           "value": "25",
-          "label": "25 GB",
-          "default": true
+          "label": "25 GB"
         },
         {
           "value": "100",
-          "label": "100 GB"
+          "label": "100 GB",
+          "default": true
         }
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "libertynode01"
+      "group_name": "cloud"
     },
     {
       "name": "LibertyNode01-name",
@@ -736,6 +687,7 @@
       "secured": false,
       "required": true,
       "immutable": false,
+      "immutable_after_create": true,
       "group_name": "virtualmachine"
     },
     {
@@ -744,7 +696,7 @@
       "description": "Expose and use public IP of virtual machine for internal communication",
       "default": "true",
       "hidden": false,
-      "label": "Use Public Management Network - LibertyNode01",
+      "label": "Use Public Management Network",
       "secured": false,
       "options": [
         {
@@ -758,8 +710,7 @@
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "libertynode01"
+      "group_name": "virtualmachine"
     },
     {
       "name": "LibertyNode01_was_liberty_install_dir",
@@ -771,7 +722,6 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
       "group_name": "libertynode01"
     },
     {
@@ -796,8 +746,30 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
       "group_name": "libertynode01"
+    },
+    {
+      "name": "LibertyNode01_local_disk",
+      "type": "string",
+      "description": "User local disk or SAN disk",
+      "default": "false",
+      "hidden": false,
+      "label": "IBMCloud - Local / SAN Disk - LibertyNode01",
+      "secured": false,
+      "options": [
+        {
+          "value": "true",
+          "label": "True"
+        },
+        {
+          "value": "false",
+          "label": "False",
+          "default": "true"
+        }
+      ],
+      "required": true,
+      "immutable": false,
+      "group_name": "cloud"
     },
     {
       "name": "ibm_pm_private_ssh_key",
@@ -833,6 +805,7 @@
       "secured": false,
       "required": true,
       "immutable": false,
+      "immutable_after_create": true,
       "group_name": "ssh_keys"
     }
   ],

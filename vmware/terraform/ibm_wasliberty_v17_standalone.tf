@@ -14,7 +14,6 @@
 variable "user_public_ssh_key" {
   type = "string"
   description = "User defined public SSH key used to connect to the virtual machine. The format must be in openSSH."
-  default = "None"
 }
 
 variable "ibm_pm_public_ssh_key" {
@@ -27,7 +26,6 @@ variable "ibm_pm_private_ssh_key" {
 
 variable "allow_unverified_ssl" {
   description = "Communication with vsphere server with self signed certificate"
-  default = "true"
 }
 
 ##############################################################
@@ -58,7 +56,6 @@ variable "ibm_stack_name" {
   description = "A unique stack name."
 }
 
-#### Default OS Admin User Map ####
 
 ##### Environment variables #####
 #Variable : ibm_im_repo
@@ -77,7 +74,6 @@ variable "ibm_im_repo_password" {
 variable "ibm_im_repo_user" {
   type = "string"
   description = "IBM Software  Installation Manager Repository username"
-  default = "repouser"
 }
 
 #Variable : ibm_pm_access_token
@@ -108,7 +104,6 @@ variable "ibm_sw_repo_password" {
 variable "ibm_sw_repo_user" {
   type = "string"
   description = "IBM Software Repo Username"
-  default = "repouser"
 }
 
 
@@ -135,63 +130,54 @@ variable "LibertyNode01-os_admin_user" {
 variable "LibertyNode01_was_liberty_base_version" {
   type = "string"
   description = "The release and fixpack level for WebSphere Liberty to be installed. Example formats are 8.5.5.11 or 17.0.2"
-  default = "17.0.2"
 }
 
 #Variable : LibertyNode01_was_liberty_edition
 variable "LibertyNode01_was_liberty_edition" {
   type = "string"
   description = "Indicates which Liberty offering should be installed. Valid values are: base, core, nd"
-  default = "base"
 }
 
 #Variable : LibertyNode01_was_liberty_install_dir
 variable "LibertyNode01_was_liberty_install_dir" {
   type = "string"
   description = "The installation root directory for the WebSphere Liberty product binaries"
-  default = "/opt/IBM/WebSphere/Liberty"
 }
 
 #Variable : LibertyNode01_was_liberty_install_grp
 variable "LibertyNode01_was_liberty_install_grp" {
   type = "string"
   description = "Operating system group name that will be assigned to the product installation"
-  default = "root"
 }
 
 #Variable : LibertyNode01_was_liberty_install_user
 variable "LibertyNode01_was_liberty_install_user" {
   type = "string"
   description = "Operating system userid that will be used to install the product. Userid will be created if it does not exist"
-  default = "root"
 }
 
 #Variable : LibertyNode01_was_liberty_liberty_servers_server1_feature
 variable "LibertyNode01_was_liberty_liberty_servers_server1_feature" {
   type = "string"
   description = "Lists the Liberty features that should be included in the feature manager list. For example, webProfile-7.0 adminCenter-1.0"
-  default = "webProfile-7.0 adminCenter-1.0"
 }
 
 #Variable : LibertyNode01_was_liberty_liberty_servers_server1_httpport
 variable "LibertyNode01_was_liberty_liberty_servers_server1_httpport" {
   type = "string"
   description = "HTTP Transport value that will be set in the defaultHttpEndpoint endpoint in server.xml"
-  default = "9080"
 }
 
 #Variable : LibertyNode01_was_liberty_liberty_servers_server1_httpsport
 variable "LibertyNode01_was_liberty_liberty_servers_server1_httpsport" {
   type = "string"
   description = "Secure HTTP Transport value that will be set in the defaultHttpEndpoint endpoint in server.xml"
-  default = "9443"
 }
 
 #Variable : LibertyNode01_was_liberty_liberty_servers_server1_keystore_id
 variable "LibertyNode01_was_liberty_liberty_servers_server1_keystore_id" {
   type = "string"
   description = "Keystore id that will be used when setting up the keyStore attribute in the server.xml"
-  default = "defaultKeyStore"
 }
 
 #Variable : LibertyNode01_was_liberty_liberty_servers_server1_keystore_password
@@ -204,14 +190,12 @@ variable "LibertyNode01_was_liberty_liberty_servers_server1_keystore_password" {
 variable "LibertyNode01_was_liberty_liberty_servers_server1_name" {
   type = "string"
   description = "Name of the initial Liberty server to be created during provisioning"
-  default = "defaultServer"
 }
 
 #Variable : LibertyNode01_was_liberty_liberty_servers_server1_users_admin_user_name
 variable "LibertyNode01_was_liberty_liberty_servers_server1_users_admin_user_name" {
   type = "string"
   description = "Administrative console username used for accessing the console, the associated password is the admin_user password"
-  default = "admin"
 }
 
 #Variable : LibertyNode01_was_liberty_liberty_servers_server1_users_admin_user_password
@@ -224,18 +208,16 @@ variable "LibertyNode01_was_liberty_liberty_servers_server1_users_admin_user_pas
 variable "LibertyNode01_was_liberty_liberty_servers_server1_users_admin_user_role" {
   type = "string"
   description = "Liberty role for which administrative users are to be added to, the admin_user will be added to this role by default"
-  default = "admin"
 }
 
 #Variable : LibertyNode01_was_liberty_wlp_user_dir
 variable "LibertyNode01_was_liberty_wlp_user_dir" {
   type = "string"
   description = "Liberty directory which product configuration will be written"
-  default = "/opt/IBM/WebSphere/Liberty/usr"
 }
 
 
-##### ungrouped variables #####
+##### virtualmachine variables #####
 
 #########################################################
 ##### Resource : LibertyNode01
@@ -260,12 +242,10 @@ variable "LibertyNode01_domain" {
 
 variable "LibertyNode01_number_of_vcpu" {
   description = "Number of virtual CPU for the virtual machine, which is required to be a positive Integer"
-  default = "2"
 }
 
 variable "LibertyNode01_memory" {
   description = "Memory assigned to the virtual machine in megabytes. This value is required to be an increment of 1024"
-  default = "2048"
 }
 
 variable "LibertyNode01_cluster" {
@@ -300,7 +280,6 @@ variable "LibertyNode01_ipv4_prefix_length" {
 
 variable "LibertyNode01_adapter_type" {
   description = "Network adapter type for vNIC Configuration"
-  default = "vmxnet3"
 }
 
 variable "LibertyNode01_root_disk_datastore" {
@@ -310,19 +289,16 @@ variable "LibertyNode01_root_disk_datastore" {
 variable "LibertyNode01_root_disk_type" {
   type = "string"
   description = "Type of template disk volume"
-  default = "eager_zeroed"
 }
 
 variable "LibertyNode01_root_disk_controller_type" {
   type = "string"
   description = "Type of template disk controller"
-  default = "scsi"
 }
 
 variable "LibertyNode01_root_disk_keep_on_remove" {
   type = "string"
   description = "Delete template disk volume when the virtual machine is deleted"
-  default = "false"
 }
 
 # vsphere vm
