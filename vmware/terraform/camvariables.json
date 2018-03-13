@@ -1,11 +1,11 @@
 {
-  "input_namespaces": [
+  "input_datatypes": [
     {
       "name": "advanced_content_runtime_chef",
       "label": "Advanced Content Runtime"
     }
   ],
-  "output_namespace": "content_template_output",
+  "output_datatype": "content_template_output",
   "input_groups": [
     {
       "name": "cloud",
@@ -18,6 +18,10 @@
     {
       "name": "environment",
       "label": "Environment"
+    },
+    {
+      "name": "liberty_install",
+      "label": "liberty_install"
     },
     {
       "name": "libertynode01",
@@ -35,6 +39,17 @@
     }
   ],
   "template_input_params": [
+    {
+      "name": "ibm_stack_id",
+      "type": "string",
+      "description": "A unique stack id.",
+      "hidden": true,
+      "label": "A unique stack id.",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "environment"
+    },
     {
       "name": "ibm_stack_name",
       "type": "string",
@@ -147,6 +162,7 @@
       "secured": false,
       "required": true,
       "immutable": true,
+      "immutable_after_create": true,
       "group_name": "environment",
       "default": "${advanced_content_runtime_chef.ibm_im_repo}"
     },
@@ -172,6 +188,7 @@
       "secured": false,
       "required": true,
       "immutable": true,
+      "immutable_after_create": true,
       "group_name": "environment"
     },
     {
@@ -179,11 +196,12 @@
       "type": "string",
       "description": "IBM Software Repo Password",
       "hidden": true,
-      "label": "IBM Software Repo Password",
+      "label": "IBM Software Repo Password - liberty_install",
       "secured": true,
       "required": true,
       "immutable": true,
-      "group_name": "environment",
+      "immutable_after_create": true,
+      "group_name": "liberty_install",
       "default": "${advanced_content_runtime_chef.ibm_sw_repo_password}"
     },
     {
@@ -195,6 +213,7 @@
       "secured": false,
       "required": true,
       "immutable": true,
+      "immutable_after_create": true,
       "group_name": "environment",
       "default": "${advanced_content_runtime_chef.ibm_sw_repo}"
     },
@@ -208,6 +227,7 @@
       "secured": false,
       "required": true,
       "immutable": true,
+      "immutable_after_create": true,
       "group_name": "environment"
     },
     {
@@ -245,11 +265,10 @@
       "hidden": false,
       "label": "Liberty Keystore password - LibertyNode01",
       "secured": true,
-      "regex": "^[!-~]{8,32}$",
-      "regexdesc": "Allow 8 to 32 printable ASCII characters except space.",
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
+      "regex": "^[!-~]{8,32}$",
+      "regexdesc": "Allow 8 to 32 printable ASCII characters except space.",
       "group_name": "libertynode01"
     },
     {
@@ -262,7 +281,6 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
       "group_name": "libertynode01"
     },
     {
@@ -272,11 +290,10 @@
       "hidden": false,
       "label": "Liberty administrative user name password - LibertyNode01",
       "secured": true,
-      "regex": "^[!-~]{8,32}$",
-      "regexdesc": "Allow 8 to 32 printable ASCII characters except space.",
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
+      "regex": "^[!-~]{8,32}$",
+      "regexdesc": "Allow 8 to 32 printable ASCII characters except space.",
       "group_name": "libertynode01"
     },
     {
@@ -289,7 +306,6 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
       "group_name": "libertynode01"
     },
     {
@@ -302,7 +318,6 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
       "group_name": "libertynode01"
     },
     {
@@ -341,6 +356,18 @@
       "secured": false,
       "required": true,
       "immutable": false,
+      "group_name": "libertynode01"
+    },
+    {
+      "name": "LibertyNode01_was_liberty_runas_user",
+      "type": "string",
+      "description": "Operating system userid that will be used to run the product. Userid will be created if it does not exist",
+      "default": "root",
+      "hidden": false,
+      "label": "Liberty runas user - LibertyNode01",
+      "secured": false,
+      "required": true,
+      "immutable": false,
       "immutable_after_create": true,
       "group_name": "libertynode01"
     },
@@ -354,7 +381,6 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
       "group_name": "libertynode01"
     },
     {
@@ -367,7 +393,6 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
       "group_name": "libertynode01"
     },
     {
@@ -380,14 +405,13 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
       "group_name": "libertynode01"
     },
     {
       "name": "LibertyNode01_was_liberty_base_version",
       "type": "string",
-      "description": "The release and fixpack level for WebSphere Liberty to be installed. Example formats are 8.5.5.11 or 17.0.2",
-      "default": "17.0.2",
+      "description": "The release and fixpack level for WebSphere Liberty to be installed. Example formats are 8.5.5.11 or 17.0.4",
+      "default": "17.0.4",
       "hidden": false,
       "label": "Liberty version - LibertyNode01",
       "secured": false,
@@ -454,6 +478,18 @@
       "default": "${advanced_content_runtime_chef.ibm_pm_public_ssh_key}"
     },
     {
+      "name": "LibertyNode01_root_disk_size",
+      "type": "string",
+      "description": "Size of template disk volume. Should be equal to template's disk size",
+      "default": "100",
+      "hidden": false,
+      "label": "Root Disk Size - LibertyNode01",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "virtualmachine"
+    },
+    {
       "name": "LibertyNode01-name",
       "type": "string",
       "description": "Short hostname of virtual machine",
@@ -465,79 +501,12 @@
       "group_name": "virtualmachine"
     },
     {
-      "name": "LibertyNode01_root_disk_controller_type",
-      "type": "string",
-      "description": "Type of template disk controller",
-      "default": "scsi",
-      "hidden": false,
-      "label": "Template Disk Controller - LibertyNode01",
-      "secured": false,
-      "options": [
-        {
-          "value": "scsi",
-          "label": "scsi",
-          "default": "true"
-        },
-        {
-          "value": "scsi-lsi-parallel",
-          "label": "scsi-lsi-parallel"
-        },
-        {
-          "value": "scsi-buslogic",
-          "label": "scsi-buslogic"
-        },
-        {
-          "value": "scsi-paravirtual",
-          "label": "scsi-paravirtual"
-        },
-        {
-          "value": "scsi-isi-sas",
-          "label": "scsi-isi-sas"
-        },
-        {
-          "value": "ide",
-          "label": "ide"
-        }
-      ],
-      "required": true,
-      "immutable": false,
-      "group_name": "virtualmachine"
-    },
-    {
       "name": "LibertyNode01_root_disk_datastore",
       "type": "string",
       "description": "Data store or storage cluster name for target virtual machine's disks",
       "hidden": false,
       "label": "Template Disk Datastore - LibertyNode01",
       "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "virtualmachine"
-    },
-    {
-      "name": "LibertyNode01_root_disk_type",
-      "type": "string",
-      "description": "Type of template disk volume",
-      "default": "eager_zeroed",
-      "hidden": false,
-      "label": "Template Disk Type - LibertyNode01",
-      "secured": false,
-      "options": [
-        {
-          "value": "eager_zeroed",
-          "label": "Thick Provision Eager Zeroed",
-          "default": "true"
-        },
-        {
-          "value": "lazy",
-          "label": "Thick Provision Lazy Zeroed"
-        },
-        {
-          "value": "thin",
-          "label": "Thin Provision",
-          "group_name": "virtualmachine"
-        }
-      ],
       "required": true,
       "immutable": false,
       "group_name": "virtualmachine"
@@ -620,7 +589,6 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
       "group_name": "libertynode01"
     },
     {
@@ -633,7 +601,6 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
       "group_name": "libertynode01"
     },
     {
@@ -643,7 +610,7 @@
       "hidden": false,
       "label": "vSphere Cluster - LibertyNode01",
       "secured": false,
-      "required": true,
+      "required": false,
       "immutable": false,
       "group_name": "cloud"
     },
@@ -654,7 +621,7 @@
       "hidden": false,
       "label": "vSphere Datacenter - LibertyNode01",
       "secured": false,
-      "required": true,
+      "required": false,
       "immutable": false,
       "group_name": "cloud"
     },
@@ -665,7 +632,7 @@
       "hidden": false,
       "label": "vSphere Folder Name - LibertyNode01",
       "secured": false,
-      "required": true,
+      "required": false,
       "immutable": false,
       "group_name": "cloud"
     },
@@ -688,6 +655,17 @@
           "default": "e1000"
         }
       ],
+      "required": true,
+      "immutable": false,
+      "group_name": "virtualmachine"
+    },
+    {
+      "name": "LibertyNode01_resource_pool",
+      "type": "string",
+      "description": "Target vSphere Resource Pool to host the virtual machine",
+      "hidden": false,
+      "label": "vSphere Resource Pool - LibertyNode01",
+      "secured": false,
       "required": true,
       "immutable": false,
       "group_name": "virtualmachine"
