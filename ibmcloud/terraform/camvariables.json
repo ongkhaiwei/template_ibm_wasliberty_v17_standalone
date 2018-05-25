@@ -727,6 +727,17 @@
       "group_name": "virtualmachine"
     },
     {
+      "name": "runtime_domain",
+      "type": "string",
+      "description": "Virtual Machine Domain Name",
+      "hidden": false,
+      "label": "Virtual machine Domain Name",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "virtualmachine"
+    },
+    {
       "name": "LibertyNode01_was_liberty_install_dir",
       "type": "string",
       "description": "The installation root directory for the WebSphere Liberty product binaries",
@@ -831,18 +842,6 @@
       "immutable": false,
       "immutable_after_create": true,
       "group_name": "ssh_keys"
-    },
-    {
-      "name": "runtime_domain",
-      "type": "string",
-      "description": "domain name",
-      "default": "${advanced_content_runtime_chef.runtime_domain}",
-      "hidden": true,
-      "label": "domain name",
-      "secured": false,
-      "required": true,
-      "immutable": true,
-      "group_name": "cloud"
     }
   ],
   "template_output_params": [
