@@ -1,6 +1,6 @@
 {
-    "name": "IBM WebSphere Application Server Liberty V17 on a single virtual machine - Amazon EC2",
-    "description": "This template deploys a standalone instance of WebSphere Liberty V17 on a Linux virtual machine. This template can install base, core or nd edition.",
+    "name": "IBM WebSphere Application Server Liberty on a single virtual machine - Amazon EC2",
+    "description": "This template deploys a standalone instance of WebSphere Liberty on a Linux virtual machine. This template can install base, core or nd edition.",
     "version": "2.0",
     "imageUrl": "",
     "image": "",
@@ -23,9 +23,9 @@
       }
     },
     "metadata": {
-      "displayName": "IBM WebSphere Application Server Liberty V17 on a single virtual machine",
+      "displayName": "IBM WebSphere Application Server Liberty on a single virtual machine",
       "providerDisplayName": "Amazon EC2",
-      "longDescription": "This template deploys a standalone instance of WebSphere Liberty V17 on a Linux virtual machine. This template can install base, core or nd edition.",
+      "longDescription": "This template deploys a standalone instance of WebSphere Liberty on a Linux virtual machine. This template can install base, core or nd edition.",
       "bullets": [{
     "title": "Clouds",
     "description": " Amazon<br>"},
@@ -37,7 +37,7 @@
     "description": "1 virtual machine:<br>  Liberty server - single node<br>"},
 {
     "title": "Software Deployed",
-    "description": "IBM WebSphere Application Server Liberty V17<br>"},
+    "description": "IBM WebSphere Application Server Liberty<br>"},
 {
     "title": "Default Virtual Machine Settings",
     "description": " t2.medium, vCPU 2, Mem (GiB) 4, EBS (GB) 100<br>"},
