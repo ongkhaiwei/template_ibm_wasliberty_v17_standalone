@@ -1,7 +1,7 @@
 {
     "name": "IBM WebSphere Application Server Liberty on a single virtual machine - IBM",
     "description": "This template deploys a standalone instance of WebSphere Liberty on a Linux virtual machine. This template can install base, core or nd edition.",
-    "version": "2.0",
+    "version": "2.1",
     "imageUrl": "",
     "image": "",
     "type": "chefcontent",
