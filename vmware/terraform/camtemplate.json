@@ -25,7 +25,7 @@
     "metadata": {
       "displayName": "IBM WebSphere Application Server Liberty on a single virtual machine",
       "providerDisplayName": "VMware vSphere",
-      "longDescription": "This template deploys a standalone instance of WebSphere Liberty on a Linux virtual machine. This template can install base, core or nd edition.",
+      "longDescription": "This template deploys a standalone instance of WebSphere Liberty on a Linux virtual machine. This template can install base, core or nd edition. Starting from version 2.2, this template can be used to install fixpacks.",
       "bullets": [{
     "title": "Clouds",
     "description": " VMware<br>"},
@@ -43,7 +43,7 @@
     "description": " vCPU 2, Memory (GB) 4, Disk (GB) 100<br>"},
 {
     "title": "Usage and Special Notes",
-    "description": "<ol class=\"list-numbering\"><li>The user is responsible for obtaining appropriate software licenses and downloads prior to template deployment.</li><li>Modify the libertynode_was_liberty_edition variable in CAM Variables to change the installation type to base, core or nd.</li><li>IBM Knowledge Center for WAS Liberty - <a href=\"https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/as_ditamaps/was900_welcome_liberty.html\" target=\"_blank\">https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/as_ditamaps/was900_welcome_liberty.html</a></li><li>IBM Support Portal - <a href=\"https://www.ibm.com/support/home/\" target=\"_blank\">https://www.ibm.com/support/home/</a></li></ol>"}
+    "description": "<ol class=\"list-numbering\"><li>The user is responsible for obtaining appropriate software licenses and downloads prior to template deployment.</li><li>Modify the libertynode_was_liberty_edition variable in CAM Variables to change the installation type to base, core or nd.</li><li>IBM Knowledge Center for WAS Liberty - <a href=\"https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/as_ditamaps/was900_welcome_liberty.html\" target=\"_blank\">https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/as_ditamaps/was900_welcome_liberty.html</a></li><li>IBM Support Portal - <a href=\"https://www.ibm.com/support/home/\" target=\"_blank\">https://www.ibm.com/support/home/</a></li><li>Notes on Fixpack installation - <a href=\"https://github.com/IBM-CAMHub-Open/template_ibm_wasliberty_v17_standalone/tree/master/vmware/terraform#usage-notes-for-fixpack-installation\" target=\"_blank\">https://github.com/IBM-CAMHub-Open/template_ibm_wasliberty_v17_standalone/tree/master/vmware/terraform#usage-notes-for-fixpack-installation</a></li></ol>"}
 ],
       "featuredImageUrl": "",
       "imageUrl": "",
