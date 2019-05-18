@@ -183,6 +183,33 @@ variable "LibertyNode01_was_liberty_base_version" {
   default     = "18.0.2"
 }
 
+#Variable : LibertyNode01_was_liberty_fixpack
+variable "LibertyNode01_was_liberty_fixpack"{
+  type        = "string"
+  description = "Fixpack number"
+  default     = ""
+}
+
+#Variable : LibertyNode01_was_liberty_fixpack_filename
+variable "LibertyNode01_was_liberty_fixpack_filename"{
+  type        = "string"
+  description = "Fixpack file name"
+  default     = ""
+}
+
+#Variable : LibertyNode01_was_liberty_fixpack_sha256
+variable "LibertyNode01_was_liberty_fixpack_sha256"{
+  type        = "string"
+  description = "Fixpack file sha256 hash"
+  default     = ""
+}
+
+#Variable : LibertyNode01_was_liberty_fixpack_java_files
+variable "LibertyNode01_was_liberty_fixpack_java_files"{
+  type        = "string"
+  description = "A space seperated list of archive files for Java 8 all platforms fixpack. There will be 3 archive files in total."
+}
+
 #Variable : LibertyNode01_was_liberty_edition
 variable "LibertyNode01_was_liberty_edition" {
   type        = "string"
@@ -619,6 +646,66 @@ EOT
 }
 
 #########################################################
+##### Resource : LibertyNode01_liberty_fixpack_install
+#########################################################
+
+resource "camc_softwaredeploy" "LibertyNode01_liberty_fixpack_install" {
+  depends_on      = ["camc_softwaredeploy.LibertyNode01_liberty_create_server"]
+  name            = "LibertyNode01_liberty_fixpack_install"
+  camc_endpoint   = "${var.ibm_pm_service}/v1/software_deployment/chef"
+  access_token    = "${var.ibm_pm_access_token}"
+  skip_ssl_verify = true
+  trace           = true
+  count 		  = "${ length(var.LibertyNode01_was_liberty_fixpack_filename) > 0 && length(var.LibertyNode01_was_liberty_fixpack_sha256) > 0 ? 1 : 0}"
+  data = <<EOT
+{
+  "os_admin_user": "${var.LibertyNode01-os_admin_user}",
+  "stack_id": "${var.ibm_stack_id}",
+  "environment_name": "_default",
+  "host_ip": "${var.LibertyNode01-mgmt-network-public == "false" ? aws_instance.LibertyNode01.private_ip : aws_instance.LibertyNode01.public_ip}",
+  "node_name": "${var.LibertyNode01-name}",
+  "runlist": "recipe[wasliberty::fixpack]",
+  "node_attributes": {
+    "ibm": {
+      "sw_repo_self_signed_cert": "true"
+    },
+    "was_liberty": {
+      "install_javafp": "${ length(var.LibertyNode01_was_liberty_fixpack_java_files) > 0 ? "true" : "false"}",
+	  "fixpack": "${var.LibertyNode01_was_liberty_fixpack}", 
+	  "fixpack_names":{
+		"file1":{
+			"filename":"${var.LibertyNode01_was_liberty_fixpack_filename}",
+			"sha256": "${var.LibertyNode01_was_liberty_fixpack_sha256}"
+		},
+		"java8":{
+			"file1":{
+				"filename":"${element(split(" ", var.LibertyNode01_was_liberty_fixpack_java_files), 0)}"
+			},
+			"file2":{
+				"filename":"${element(split(" ", var.LibertyNode01_was_liberty_fixpack_java_files), 1)}"
+			},
+			"file3":{
+				"filename":"${element(split(" ", var.LibertyNode01_was_liberty_fixpack_java_files), 2)}"
+			}							
+		}
+	  }
+    }
+  },
+  "vault_content": {
+    "item": "secrets",
+    "values": {
+      "ibm": {
+        "im_repo_password": "${var.ibm_im_repo_password}",
+        "sw_repo_password": "${var.ibm_sw_repo_password}"
+      }
+    },
+    "vault": "${var.ibm_stack_id}"
+  }
+}
+EOT
+}		
+
+#########################################################
 ##### Resource : VaultItem
 #########################################################
 
@@ -653,4 +740,9 @@ output "LibertyNode01_roles" {
 
 output "stack_id" {
   value = "${var.ibm_stack_id}"
+}
+
+output "liberty_version" {
+  depends_on      = ["camc_softwaredeploy.LibertyNode01_liberty_create_server","camc_softwaredeploy.LibertyNode01_liberty_fixpack_install"]
+  value ="${ length(var.LibertyNode01_was_liberty_fixpack_filename) > 0 ? var.LibertyNode01_was_liberty_fixpack : var.LibertyNode01_was_liberty_base_version}"
 }

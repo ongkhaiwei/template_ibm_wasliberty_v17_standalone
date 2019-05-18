@@ -354,24 +354,28 @@ variable "LibertyNode01_root_disk_keep_on_remove" {
   default     = "false"
 }
 
+#Variable : LibertyNode01_was_liberty_fixpack
 variable "LibertyNode01_was_liberty_fixpack"{
   type        = "string"
   description = "Fixpack number"
   default     = ""
 }
 
+#Variable : LibertyNode01_was_liberty_fixpack_filename
 variable "LibertyNode01_was_liberty_fixpack_filename"{
   type        = "string"
   description = "Fixpack file name"
   default     = ""
 }
 
+#Variable : LibertyNode01_was_liberty_fixpack_sha256
 variable "LibertyNode01_was_liberty_fixpack_sha256"{
   type        = "string"
   description = "Fixpack file sha256 hash"
   default     = ""
 }
 
+#Variable : LibertyNode01_was_liberty_fixpack_java_files
 variable "LibertyNode01_was_liberty_fixpack_java_files"{
   type        = "string"
   description = "A space seperated list of archive files for Java 8 all platforms fixpack. There will be 3 archive files in total."

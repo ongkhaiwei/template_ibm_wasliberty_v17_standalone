@@ -35,10 +35,12 @@ IBM WebSphere Application Server Liberty<br>
 
 1. The user is responsible for obtaining appropriate software licenses and downloads prior to template deployment.<br>
 2. Modify the libertynode_was_liberty_edition variable in CAM Variables to change the installation type to base, core or nd.<br>
-3. IBM Knowledge Center for WAS Liberty - <a href=\"https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/as_ditamaps/was900_welcome_liberty.html\" target=\"_blank\">https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/as_ditamaps/was900_welcome_liberty.html</a><br>
-4. IBM Support Portal - <a href=\"https://www.ibm.com/support/home/\" target=\"_blank\">https://www.ibm.com/support/home/</a><br>
-<br>
+3. [IBM Knowledge Center for WAS Liberty](https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/as_ditamaps/was900_welcome_liberty.html)
+4. [IBM Support Portal](https://www.ibm.com/support/home/)
 
+### Usage notes for fixpack installation
+
+WebSphere Liberty fixpack *local repository files for Installation Manager (IM) install* zip files and [Java SDK fixpack](http://www-01.ibm.com/support/docview.wss?uid=swg24042430#80535) all platforms fixpack archive files (3 archive files) must be placed in /var/swRepo/private/was/v90/maint/. Fixpack can be installed by providing values for the attributes in libertynode01fixpack section and then performing a plan/apply. **You cannot rollback the installed fixpack.**
 
 ## Overview
 
