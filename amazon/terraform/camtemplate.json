@@ -1,7 +1,7 @@
 {
     "name": "IBM WebSphere Application Server Liberty on a single virtual machine - Amazon EC2",
     "description": "This template deploys a standalone instance of WebSphere Liberty on a Linux virtual machine. This template can install base, core or nd edition.",
-    "version": "2.1",
+    "version": "2.2",
     "imageUrl": "",
     "image": "",
     "type": "chefcontent",
@@ -23,7 +23,6 @@
       }
     },
     "metadata": {
-      "displayName": "IBM WebSphere Application Server Liberty on a single virtual machine",
       "providerDisplayName": "VMware vSphere",
       "longDescription": "This template deploys a standalone instance of WebSphere Liberty on a Linux virtual machine. This template can install base, core or nd edition. Starting from version 2.2, this template can be used to install fixpacks.",
       "bullets": [{
